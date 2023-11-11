@@ -89,7 +89,6 @@ class UserModel with ChangeNotifier {
         .get()
         .then((value) {
       user = User.fromJson(value.data()!);
-      print(user!.toMap());
     }).catchError((onError) {
       throw onError.toString();
     });

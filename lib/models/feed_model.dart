@@ -11,7 +11,7 @@ class FeedModel with ChangeNotifier {
     /// get home feeds (random wallpapers)
     await DioHelper.getData(
       url: '/curated',
-      query: {'per_page': 30, 'page': page},
+      query: {'per_page': perPage, 'page': page},
       token: apiKey,
     ).then((value) {
       /// reset feeds list
