@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zetaton_flutter_task/screens/user/register_screen.dart';
 
+import '../../common/tools.dart';
+import '../../models/user/user_model.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/custom_text_field.dart';
 
@@ -38,10 +42,12 @@ class LoginScreen extends StatelessWidget {
                         prefix: Icons.email_outlined,
                         validateFunc: (String value) {
                           if (value.isEmpty) {
+                            /// empty
                             return 'please enter your email';
                           } else if (!RegExp(
                                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
+                            /// not a valid email
                             return 'please enter a valid email';
                           }
                         },
@@ -56,6 +62,7 @@ class LoginScreen extends StatelessWidget {
                         password: true,
                         validateFunc: (String value) {
                           if (value.isEmpty) {
+                            /// empty
                             return 'please enter your password';
                           }
                         },
@@ -65,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                       AppButton(
                         title: "Login",
                         enabled: true,
-                        onTap: submitLogin,
+                        onTap: () => submitLogin(context),
                       ),
 
                       /// don't have an account ?
@@ -107,5 +114,20 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  submitLogin() {}
+  submitLogin(context) {
+    try {
+      /// validate register form
+      if (!formKey.currentState!.validate()) return;
+
+      /// call login function
+      Provider.of<UserModel>(context, listen: false).login(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } catch (e) {
+      print("caught exception from submit - login");
+      print(e.toString());
+      Tools.showSnackBar(context, e.toString());
+    }
+  }
 }

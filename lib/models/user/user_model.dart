@@ -60,4 +60,37 @@ class UserModel with ChangeNotifier {
       throw onError.toString();
     });
   }
+
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    /// login with firebase
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    )
+        .then((value) {
+      /// get user info
+      getUserInfo(uId: value.user!.uid);
+    }).catchError((onError) {
+      throw onError.toString();
+    });
+  }
+
+  Future<void> getUserInfo({
+    required String uId,
+  }) async {
+    /// get user info
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uId)
+        .get()
+        .then((value) {
+      user = User.fromJson(value.data()!);
+    }).catchError((onError) {
+      throw onError.toString();
+    });
+  }
 }
