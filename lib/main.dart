@@ -6,6 +6,8 @@ import 'package:zetaton_flutter_task/screens/user/login_screen.dart';
 import 'package:zetaton_flutter_task/screens/user/register_screen.dart';
 
 import 'common/dio_helper.dart';
+import 'models/feed_model.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -26,6 +28,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UserModel>(create: (_) => UserModel()),
+        ChangeNotifierProvider<FeedModel>(create: (_) => FeedModel()),
       ],
       child: MaterialApp(
         title: 'Flutter Task',
