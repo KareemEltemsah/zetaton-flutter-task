@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zetaton_flutter_task/models/user/user_model.dart';
+import 'package:zetaton_flutter_task/screens/user/login_screen.dart';
 
+import '../../common/tools.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/custom_text_field.dart';
 
@@ -40,8 +44,10 @@ class RegisterScreen extends StatelessWidget {
                         label: "First Name",
                         validateFunc: (String value) {
                           if (value.isEmpty) {
+                            /// empty
                             return 'first name is required';
-                          } else if (value.length < 3) {
+                          } else if (value.trim().length < 3) {
+                            /// very short
                             return 'should be at least 3 letters';
                           }
                         },
@@ -54,8 +60,10 @@ class RegisterScreen extends StatelessWidget {
                         label: "Last Name",
                         validateFunc: (String value) {
                           if (value.isEmpty) {
+                            /// empty
                             return 'last name is required';
-                          } else if (value.length < 3) {
+                          } else if (value.trim().length < 3) {
+                            /// very short
                             return 'should be at least 3 letters';
                           }
                         },
@@ -69,10 +77,12 @@ class RegisterScreen extends StatelessWidget {
                         prefix: Icons.email_outlined,
                         validateFunc: (String value) {
                           if (value.isEmpty) {
+                            /// empty
                             return 'email is required';
                           } else if (!RegExp(
                                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
+                            /// not a valid email
                             return 'please enter a valid email';
                           }
                         },
@@ -86,6 +96,7 @@ class RegisterScreen extends StatelessWidget {
                         prefix: Icons.phone_outlined,
                         validateFunc: (String value) {
                           if (value.isEmpty) {
+                            /// empty
                             return 'phone is required';
                           }
                         },
@@ -100,8 +111,10 @@ class RegisterScreen extends StatelessWidget {
                         password: true,
                         validateFunc: (String value) {
                           if (value.isEmpty) {
+                            /// empty
                             return 'password is required';
                           } else if (value.length < 6) {
+                            /// very short
                             return 'should be at least 6 characters';
                           }
                         },
@@ -111,7 +124,7 @@ class RegisterScreen extends StatelessWidget {
                       AppButton(
                         title: "Register",
                         enabled: true,
-                        onTap: submitRegister,
+                        onTap: () => submitRegister(context),
                       ),
                     ],
                   ),
@@ -124,5 +137,28 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 
-  submitRegister() {}
+  submitRegister(context) async {
+    try {
+      /// validate register form
+      if (!formKey.currentState!.validate()) return;
+
+      /// call register function
+      await Provider.of<UserModel>(context, listen: false).registerUser(
+        firstName: firstNameController.text.trim(),
+        lastName: lastNameController.text.trim(),
+        email: emailController.text,
+        phone: phoneController.text,
+        password: passwordController.text,
+      );
+
+      /// navigate to login screen
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) {
+          return LoginScreen();
+        },
+      ));
+    } catch (e) {
+      Tools.showSnackBar(context, e.toString());
+    }
+  }
 }
