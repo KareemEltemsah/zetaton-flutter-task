@@ -44,7 +44,7 @@ class _AppButtonState extends State<AppButton> {
                 onPressed: () {
                   if (loading) return;
                   setState(() => loading = true);
-                  widget.onTap;
+                  widget.onTap();
                   setState(() => loading = false);
                 },
                 elevation: 0,
@@ -54,10 +54,15 @@ class _AppButtonState extends State<AppButton> {
                       color: Theme.of(context).primaryColor, width: 1.5),
                 ),
                 child: Center(
-                  child: Text(
-                    widget.title,
-                    style: const TextStyle(color: Colors.white, fontSize: 18),
-                  ),
+                  child: loading
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : Text(
+                          widget.title,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 18),
+                        ),
                 ),
               ),
             ),
