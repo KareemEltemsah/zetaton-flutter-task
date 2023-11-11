@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:zetaton_flutter_task/models/user/user_model.dart';
+import 'package:zetaton_flutter_task/models/user_model.dart';
 import 'package:zetaton_flutter_task/screens/user/login_screen.dart';
 import 'package:zetaton_flutter_task/screens/user/register_screen.dart';
 

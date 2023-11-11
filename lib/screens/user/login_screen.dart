@@ -3,9 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:zetaton_flutter_task/screens/user/register_screen.dart';
 
 import '../../common/tools.dart';
-import '../../models/user/user_model.dart';
+import '../../models/user_model.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/custom_text_field.dart';
+import '../tabs_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/login';
@@ -121,6 +122,12 @@ class LoginScreen extends StatelessWidget {
       await Provider.of<UserModel>(context, listen: false).login(
         email: emailController.text,
         password: passwordController.text,
+      );
+
+      /// navigate to home screen
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        TabsScreen.routeName,
+        (r) => false,
       );
     } catch (e) {
       Tools.showSnackBar(context, e.toString());

@@ -82,13 +82,14 @@ class UserModel with ChangeNotifier {
   Future<void> getUserInfo({
     required String uId,
   }) async {
-    /// get user info
+    /// get user info from Firestore
     await FirebaseFirestore.instance
         .collection('users')
         .doc(uId)
         .get()
         .then((value) {
       user = User.fromJson(value.data()!);
+      print(user!.toMap());
     }).catchError((onError) {
       throw onError.toString();
     });
