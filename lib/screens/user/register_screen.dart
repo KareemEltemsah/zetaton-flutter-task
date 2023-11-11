@@ -126,6 +126,35 @@ class RegisterScreen extends StatelessWidget {
                         enabled: true,
                         onTap: () => submitRegister(context),
                       ),
+
+                      /// don't have an account ?
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            const Text('Already have an account?'),
+                            InkWell(
+                              onTap: () {
+                                /// navigate to register screen
+                                Navigator.of(context)
+                                    .pushReplacement(MaterialPageRoute(
+                                  builder: (context) {
+                                    return LoginScreen();
+                                  },
+                                ));
+                              },
+                              child: Text(
+                                ' login',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
