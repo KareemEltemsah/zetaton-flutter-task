@@ -114,19 +114,17 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  submitLogin(context) {
+  submitLogin(context) async {
     try {
       /// validate register form
       if (!formKey.currentState!.validate()) return;
 
       /// call login function
-      Provider.of<UserModel>(context, listen: false).login(
+      await Provider.of<UserModel>(context, listen: false).login(
         email: emailController.text,
         password: passwordController.text,
       );
     } catch (e) {
-      print("caught exception from submit - login");
-      print(e.toString());
       Tools.showSnackBar(context, e.toString());
     }
   }

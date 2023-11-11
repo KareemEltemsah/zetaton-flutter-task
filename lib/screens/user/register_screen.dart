@@ -127,7 +127,7 @@ class RegisterScreen extends StatelessWidget {
                         onTap: () => submitRegister(context),
                       ),
 
-                      /// don't have an account ?
+                      /// already have an account ?
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Row(

@@ -1,8 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zetaton_flutter_task/models/user/user_model.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // init firebase
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -23,7 +29,6 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
       ),
-      debugShowCheckedModeBanner: false,
       home: const Scaffold(),
     );
   }
