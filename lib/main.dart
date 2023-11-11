@@ -5,11 +5,15 @@ import 'package:zetaton_flutter_task/models/user_model.dart';
 import 'package:zetaton_flutter_task/screens/user/login_screen.dart';
 import 'package:zetaton_flutter_task/screens/user/register_screen.dart';
 
+import 'common/dio_helper.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // init firebase
+  /// init firebase
   await Firebase.initializeApp();
+
+  /// init Dio helper
+  DioHelper.init();
 
   runApp(const MyApp());
 }
