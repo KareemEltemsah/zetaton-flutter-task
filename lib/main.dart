@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zetaton_flutter_task/models/user/user_model.dart';
+import 'package:zetaton_flutter_task/screens/user/login_screen.dart';
+import 'package:zetaton_flutter_task/screens/user/register_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +30,10 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         debugShowCheckedModeBanner: false,
+        routes: {
+          LoginScreen.routeName: (ctx) => LoginScreen(),
+          RegisterScreen.routeName: (ctx) => RegisterScreen(),
+        },
       ),
       home: const Scaffold(),
     );

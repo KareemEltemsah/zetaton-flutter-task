@@ -8,6 +8,8 @@ import '../../widgets/app_button.dart';
 import '../../widgets/custom_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
+  static const routeName = '/login';
+
   LoginScreen({super.key});
 
   var formKey = GlobalKey<FormState>();
@@ -85,12 +87,8 @@ class LoginScreen extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 /// navigate to register screen
-                                Navigator.of(context)
-                                    .pushReplacement(MaterialPageRoute(
-                                  builder: (context) {
-                                    return RegisterScreen();
-                                  },
-                                ));
+                                Navigator.of(context).pushReplacementNamed(
+                                    RegisterScreen.routeName);
                               },
                               child: Text(
                                 ' register',

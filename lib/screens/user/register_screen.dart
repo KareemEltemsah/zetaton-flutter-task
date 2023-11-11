@@ -8,6 +8,8 @@ import '../../widgets/app_button.dart';
 import '../../widgets/custom_text_field.dart';
 
 class RegisterScreen extends StatelessWidget {
+  static const routeName = '/register';
+
   RegisterScreen({super.key});
 
   var formKey = GlobalKey<FormState>();
@@ -137,12 +139,8 @@ class RegisterScreen extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 /// navigate to register screen
-                                Navigator.of(context)
-                                    .pushReplacement(MaterialPageRoute(
-                                  builder: (context) {
-                                    return LoginScreen();
-                                  },
-                                ));
+                                Navigator.of(context).pushReplacementNamed(
+                                    LoginScreen.routeName);
                               },
                               child: Text(
                                 ' login',
@@ -181,11 +179,7 @@ class RegisterScreen extends StatelessWidget {
       );
 
       /// navigate to login screen
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) {
-          return LoginScreen();
-        },
-      ));
+      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
     } catch (e) {
       Tools.showSnackBar(context, e.toString());
     }
