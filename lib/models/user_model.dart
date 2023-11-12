@@ -94,6 +94,8 @@ class UserModel with ChangeNotifier {
         .get()
         .then((value) {
       user = User.fromJson(value.data()!);
+      /// notify listeners to show home screen
+      notifyListeners();
 
       /// save user data
       saveUserInfo();
@@ -114,6 +116,7 @@ class UserModel with ChangeNotifier {
     /// logout and remove user data
     user = null;
     await CacheHelper.removeData(key: 'user_data');
+    /// notify listeners to show login screen
     notifyListeners();
   }
 
@@ -124,6 +127,7 @@ class UserModel with ChangeNotifier {
 
     /// assign saved data to current user
     user = User.fromJson(jsonDecode(userInfo));
+    /// notify listeners to show home screen
     notifyListeners();
   }
 }

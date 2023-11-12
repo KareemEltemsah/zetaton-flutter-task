@@ -47,8 +47,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Consumer<UserModel>(
           builder: (context, model, child) {
-            /// check is user is logged in
+            /// check is user is not logged in
             if (model.user == null) return LoginScreen();
+
+            /// user logged in
             return const TabsScreen();
           },
         ),

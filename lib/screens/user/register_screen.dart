@@ -138,9 +138,8 @@ class RegisterScreen extends StatelessWidget {
                             const Text('Already have an account?'),
                             InkWell(
                               onTap: () {
-                                /// navigate to register screen
-                                Navigator.of(context).pushReplacementNamed(
-                                    LoginScreen.routeName);
+                                /// navigate back to login screen
+                                Navigator.of(context).pop(false);
                               },
                               child: Text(
                                 ' login',
@@ -178,8 +177,8 @@ class RegisterScreen extends StatelessWidget {
         password: passwordController.text,
       );
 
-      /// navigate to login screen
-      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+      /// navigate back to login screen
+      Navigator.of(context).pop(false);
     } catch (e) {
       Tools.showSnackBar(context, e.toString());
     }

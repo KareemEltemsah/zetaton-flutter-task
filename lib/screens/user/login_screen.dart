@@ -88,8 +88,8 @@ class LoginScreen extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 /// navigate to register screen
-                                Navigator.of(context).pushReplacementNamed(
-                                    RegisterScreen.routeName);
+                                Navigator.of(context)
+                                    .pushNamed(RegisterScreen.routeName);
                               },
                               child: Text(
                                 ' register',
@@ -122,12 +122,6 @@ class LoginScreen extends StatelessWidget {
       await Provider.of<UserModel>(context, listen: false).login(
         email: emailController.text,
         password: passwordController.text,
-      );
-
-      /// navigate to home screen
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        TabsScreen.routeName,
-        (r) => false,
       );
     } catch (e) {
       Tools.showSnackBar(context, e.toString());
