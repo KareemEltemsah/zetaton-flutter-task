@@ -39,6 +39,9 @@ dependencies:
   visibility_detector: ^0.4.0+2
   image_gallery_saver: ^2.0.3
 
+  # local database
+  sqflite: ^2.3.0
+
   # caching
   shared_preferences: ^2.2.2
 
