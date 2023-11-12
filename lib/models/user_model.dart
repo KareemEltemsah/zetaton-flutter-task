@@ -26,9 +26,9 @@ class UserModel with ChangeNotifier {
       email: email,
       password: password,
     )
-        .then((value) {
+        .then((value) async {
       /// save user data to Firestore
-      saveUserInfoToFirestore(
+      await saveUserInfoToFirestore(
         uId: value.user!.uid,
         firstName: firstName,
         lastName: lastName,
@@ -76,9 +76,9 @@ class UserModel with ChangeNotifier {
       email: email,
       password: password,
     )
-        .then((value) {
+        .then((value) async {
       /// get user info
-      getUserInfo(uId: value.user!.uid);
+      await getUserInfo(uId: value.user!.uid);
     }).catchError((onError) {
       throw onError.toString();
     });
@@ -108,6 +108,13 @@ class UserModel with ChangeNotifier {
       key: 'user_data',
       value: jsonEncode(user!.toMap()),
     );
+  }
+
+  logout() async {
+    /// logout and remove user data
+    user = null;
+    await CacheHelper.removeData(key: 'user_data');
+    notifyListeners();
   }
 
   getLocalUser() {

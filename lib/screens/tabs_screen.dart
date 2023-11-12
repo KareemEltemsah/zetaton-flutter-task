@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zetaton_flutter_task/screens/account_screen.dart';
 import 'package:zetaton_flutter_task/screens/home_screen.dart';
 import 'package:zetaton_flutter_task/screens/search_screen.dart';
 
@@ -16,6 +17,7 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   final List<Widget> _pages = [
     const HomeScreen(),
+    const AccountScreen(),
   ];
 
   int _selectedPageIndex = 0;
@@ -28,12 +30,11 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Image.asset(
-            logo,
-            height: 40,
-          ),
+        title: Image.asset(
+          logo,
+          height: 40,
         ),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
@@ -46,7 +47,6 @@ class _TabsScreenState extends State<TabsScreen> {
           ),
         ],
       ),
-      drawer: const Drawer(),
       body: IndexedStack(
         index: _selectedPageIndex,
         children: _pages,
@@ -63,6 +63,11 @@ class _TabsScreenState extends State<TabsScreen> {
             icon: Icon(Icons.favorite_outline),
             activeIcon: Icon(Icons.favorite),
             label: 'Favorite',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outlined),
+            activeIcon: Icon(Icons.person),
+            label: 'Account',
           ),
         ],
         backgroundColor: Colors.white,
