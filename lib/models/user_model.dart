@@ -9,7 +9,9 @@ import 'package:zetaton_flutter_task/models/entities/user.dart';
 class UserModel with ChangeNotifier {
   User? user;
 
-  UserModel();
+  UserModel() {
+    getLocalUser();
+  }
 
   Future<void> registerUser({
     required String firstName,
@@ -106,5 +108,15 @@ class UserModel with ChangeNotifier {
       key: 'user_data',
       value: jsonEncode(user!.toMap()),
     );
+  }
+
+  getLocalUser() {
+    /// check if there is user data saved locally
+    var userInfo = CacheHelper.getData(key: 'user_data');
+    if (userInfo == null) return;
+
+    /// assign saved data to current user
+    user = User.fromJson(jsonDecode(userInfo));
+    notifyListeners();
   }
 }

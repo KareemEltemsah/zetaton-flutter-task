@@ -45,6 +45,13 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         debugShowCheckedModeBanner: false,
+        home: Consumer<UserModel>(
+          builder: (context, model, child) {
+            /// check is user is logged in
+            if (model.user == null) return LoginScreen();
+            return const TabsScreen();
+          },
+        ),
         routes: {
           TabsScreen.routeName: (ctx) => const TabsScreen(),
           LoginScreen.routeName: (ctx) => LoginScreen(),
@@ -52,7 +59,6 @@ class MyApp extends StatelessWidget {
           SearchScreen.routeName: (ctx) => const SearchScreen(),
         },
       ),
-      home: const Scaffold(),
     );
   }
 }
