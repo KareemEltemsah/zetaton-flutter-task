@@ -110,6 +110,13 @@ class UserModel with ChangeNotifier {
     );
   }
 
+  logout() async {
+    /// logout and remove user data
+    user = null;
+    await CacheHelper.removeData(key: 'user_data');
+    notifyListeners();
+  }
+
   getLocalUser() {
     /// check if there is user data saved locally
     var userInfo = CacheHelper.getData(key: 'user_data');
