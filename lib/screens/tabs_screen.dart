@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zetaton_flutter_task/screens/home_screen.dart';
+import 'package:zetaton_flutter_task/screens/search_screen.dart';
 
 import '../common/constants.dart';
 
@@ -35,7 +36,10 @@ class _TabsScreenState extends State<TabsScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              /// navigate to search screen
+              Navigator.of(context).pushNamed(SearchScreen.routeName);
+            },
             icon: const Icon(
               Icons.search_outlined,
             ),

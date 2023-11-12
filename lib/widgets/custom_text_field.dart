@@ -8,8 +8,11 @@ class CustomTextField extends StatefulWidget {
   final bool? enable;
   final bool password;
   final String? label;
+  final String? hint;
   final Function? validateFunc;
+  final Function? onChange;
   final double radius;
+  final bool autofocus;
 
   const CustomTextField({
     super.key,
@@ -20,8 +23,11 @@ class CustomTextField extends StatefulWidget {
     this.enable,
     this.password = false,
     this.label,
+    this.hint,
     this.validateFunc,
+    this.onChange,
     this.radius = 10.0,
+    this.autofocus = false,
   });
 
   @override
@@ -48,6 +54,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
       child: TextFormField(
+        autofocus: widget.autofocus,
         controller: widget.controller,
         focusNode: widget.focusNode,
         keyboardType: widget.type,
@@ -58,7 +65,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
           if (widget.validateFunc != null) return widget.validateFunc!(text);
           return null;
         },
+        onChanged: (value) {
+          if (widget.onChange != null) widget.onChange!(value);
+        },
         decoration: InputDecoration(
+          hintText: widget.hint,
           labelText: widget.label,
           prefixIcon: widget.prefix != null
               ? Icon(
