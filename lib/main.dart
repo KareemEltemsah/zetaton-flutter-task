@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:zetaton_flutter_task/models/search_model.dart';
 import 'package:zetaton_flutter_task/models/user_model.dart';
 import 'package:zetaton_flutter_task/screens/tabs_screen.dart';
 import 'package:zetaton_flutter_task/screens/user/login_screen.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<UserModel>(create: (_) => UserModel()),
         ChangeNotifierProvider<FeedModel>(create: (_) => FeedModel()),
+        ChangeNotifierProvider<SearchModel>(create: (_) => SearchModel()),
       ],
       child: MaterialApp(
         title: 'Flutter Task',
