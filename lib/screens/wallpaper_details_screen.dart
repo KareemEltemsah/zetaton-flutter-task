@@ -4,7 +4,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:provider/provider.dart';
 import 'package:zetaton_flutter_task/models/entities/wallpaper.dart';
+import 'package:zetaton_flutter_task/models/favorites_model.dart';
 
 import '../common/tools.dart';
 
@@ -24,8 +26,15 @@ class _WallpaperDetailsScreenState extends State<WallpaperDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: InkWell(
-        /// double tap to favorite
-        onDoubleTap: () => setState(() => isFavorite = true),
+        onDoubleTap: () {
+          /// already favorite
+          if (isFavorite) return;
+
+          /// double tap to favorite
+          Provider.of<FavoritesModel>(context, listen: false)
+              .addFavorite(widget.wallpaper);
+          setState(() => isFavorite = true);
+        },
         child: Stack(
           children: [
             /// wallpaper
@@ -50,20 +59,44 @@ class _WallpaperDetailsScreenState extends State<WallpaperDetailsScreen> {
                 child: Column(
                   children: [
                     /// favorite button
-                    IconButton(
-                      /// tap will trigger the opposite status
-                      onPressed: () => setState(() => isFavorite = !isFavorite),
-                      icon: Icon(
-                        isFavorite ? Icons.favorite : Icons.favorite_outline,
-                        size: 30,
-                        color: isFavorite ? Colors.red : Colors.white,
-                      ),
+                    Consumer<FavoritesModel>(
+                      builder: (context, value, child) {
+                        /// check if it's favorite wallpaper
+                        isFavorite =
+                            Provider.of<FavoritesModel>(context, listen: false)
+                                .favorites
+                                .any((e) => e.id == widget.wallpaper.id);
+                        return IconButton(
+                          /// tap will trigger the opposite status
+                          onPressed: () {
+                            if (isFavorite) {
+                              /// remove favorite
+                              Provider.of<FavoritesModel>(context,
+                                      listen: false)
+                                  .removeFavorite(widget.wallpaper);
+                            } else {
+                              /// add favorite
+                              Provider.of<FavoritesModel>(context,
+                                      listen: false)
+                                  .addFavorite(widget.wallpaper);
+                            }
+                            setState(() => isFavorite = !isFavorite);
+                          },
+                          icon: Icon(
+                            isFavorite
+                                ? Icons.favorite
+                                : Icons.favorite_outline,
+                            size: 30,
+                            color: isFavorite ? Colors.red : Colors.white,
+                          ),
+                        );
+                      },
                     ),
 
                     /// download button
                     IconButton(
                       /// save image
-                      onPressed: saveImage(context),
+                      onPressed: () => saveImage(context),
                       icon: const Icon(
                         Icons.download,
                         size: 30,
