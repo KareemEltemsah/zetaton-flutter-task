@@ -11,14 +11,19 @@ class Wallpaper {
     mediumSize = json['src']['medium'];
   }
 
+  Wallpaper.fromDatabase(Map<String, dynamic> json) {
+    id = json['id'];
+    originalSize = json['original'];
+    largeSize = json['large2x'];
+    mediumSize = json['medium'];
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'src': {
-        'original': originalSize,
-        'large2x': largeSize,
-        'medium': mediumSize,
-      }
+      'original': originalSize,
+      'large2x': largeSize,
+      'medium': mediumSize,
     };
   }
 }
