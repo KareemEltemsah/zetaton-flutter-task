@@ -21,7 +21,7 @@ class WallpaperGridView extends StatelessWidget {
         childAspectRatio: 2 / 3,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return WallpaperCard(wallpaperUrl: wallpapers[index].mediumSize!);
+        return WallpaperCard(wallpaper: wallpapers[index]);
       },
     );
   }
