@@ -8,6 +8,7 @@ import 'package:zetaton_flutter_task/screens/tabs_screen.dart';
 import 'package:zetaton_flutter_task/screens/user/login_screen.dart';
 import 'package:zetaton_flutter_task/screens/user/register_screen.dart';
 
+import 'common/cache_helper.dart';
 import 'common/dio_helper.dart';
 import 'models/feed_model.dart';
 
@@ -19,6 +20,9 @@ void main() async {
 
   /// init Dio helper
   DioHelper.init();
+
+  /// init cache helper
+  await CacheHelper.init();
 
   runApp(const MyApp());
 }

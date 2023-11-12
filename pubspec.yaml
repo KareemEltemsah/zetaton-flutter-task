@@ -38,6 +38,9 @@ dependencies:
   cached_network_image: ^3.3.0
   visibility_detector: ^0.4.0+2
 
+  # caching
+  shared_preferences: ^2.2.2
+
   # network
   dio: ^5.3.3
 

@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/cupertino.dart';
+import 'package:zetaton_flutter_task/common/cache_helper.dart';
 import 'package:zetaton_flutter_task/models/entities/user.dart';
 
 class UserModel with ChangeNotifier {
@@ -23,7 +26,7 @@ class UserModel with ChangeNotifier {
     )
         .then((value) {
       /// save user data to Firestore
-      createUser(
+      saveUserInfoToFirestore(
         uId: value.user!.uid,
         firstName: firstName,
         lastName: lastName,
@@ -35,7 +38,7 @@ class UserModel with ChangeNotifier {
     });
   }
 
-  Future<void> createUser({
+  Future<void> saveUserInfoToFirestore({
     required String uId,
     required String firstName,
     required String lastName,
@@ -89,8 +92,19 @@ class UserModel with ChangeNotifier {
         .get()
         .then((value) {
       user = User.fromJson(value.data()!);
+
+      /// save user data
+      saveUserInfo();
     }).catchError((onError) {
       throw onError.toString();
     });
+  }
+
+  saveUserInfo() async {
+    /// locally save user data
+    await CacheHelper.saveData(
+      key: 'user_data',
+      value: jsonEncode(user!.toMap()),
+    );
   }
 }
