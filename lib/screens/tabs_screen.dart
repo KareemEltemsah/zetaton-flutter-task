@@ -4,6 +4,7 @@ import 'package:zetaton_flutter_task/screens/home_screen.dart';
 import 'package:zetaton_flutter_task/screens/search_screen.dart';
 
 import '../common/constants.dart';
+import 'favorites_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -17,6 +18,7 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   final List<Widget> _pages = [
     const HomeScreen(),
+    const FavoritesScreen(),
     const AccountScreen(),
   ];
 
@@ -41,8 +43,10 @@ class _TabsScreenState extends State<TabsScreen> {
               /// navigate to search screen
               Navigator.of(context).pushNamed(SearchScreen.routeName);
             },
+            padding: EdgeInsetsDirectional.only(end: 8),
             icon: const Icon(
               Icons.search_outlined,
+              size: 30,
             ),
           ),
         ],

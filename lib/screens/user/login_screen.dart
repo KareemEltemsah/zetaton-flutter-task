@@ -6,7 +6,6 @@ import '../../common/tools.dart';
 import '../../models/user_model.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/custom_text_field.dart';
-import '../tabs_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/login';
