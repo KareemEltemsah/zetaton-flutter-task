@@ -100,6 +100,11 @@ class RegisterScreen extends StatelessWidget {
                           if (value.isEmpty) {
                             /// empty
                             return 'phone is required';
+                          } else if (!RegExp(
+                                  r"^(\([2-9]{1}[0-9]{2}\) |[2-9]{1}[0-9]{2}-)[0-9]{3}-[0-9]{4}$")
+                              .hasMatch(value)) {
+                            /// not a valid USA number
+                            return 'please enter a valid USA number';
                           }
                         },
                       ),
