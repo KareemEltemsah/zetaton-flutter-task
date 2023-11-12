@@ -76,6 +76,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   widget.prefix,
                 )
               : null,
+
+          /// for password fields
           suffixIcon: widget.password
               ? IconButton(
                   onPressed: changePasswordVisibility,

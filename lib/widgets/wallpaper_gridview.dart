@@ -13,6 +13,9 @@ class WallpaperGridView extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       itemCount: wallpapers.length,
+
+      /// disable scrolling, grid view will be
+      /// wrapped with SingleChildScrollView
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
